@@ -1,0 +1,27 @@
+{
+  "name": "lms",
+  "version": "1.0.0",
+  "description": "backend for lms ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aryanghugare/LearnHub-Centralized-Learning-Assessment-Platform.git"
+  },
+  "author": "aryan ghugare",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aryanghugare/LearnHub-Centralized-Learning-Assessment-Platform/issues"
+  },
+  "homepage": "https://github.com/aryanghugare/LearnHub-Centralized-Learning-Assessment-Platform#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.1.4",
+    "nodemon": "^3.1.11"
+  }
+}
