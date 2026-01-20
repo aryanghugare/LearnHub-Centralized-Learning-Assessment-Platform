@@ -81,8 +81,8 @@ lastActive: {
 },
 {
     timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
+    toJSON: { virtuals: true }, // to include the virtuals 
+    toObject: { virtuals: true }, // to include the virtuals 
   }
 
 );
