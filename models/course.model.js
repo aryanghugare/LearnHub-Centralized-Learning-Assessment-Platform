@@ -90,7 +90,7 @@ const courseSchema = new mongoose.Schema({
 
 // Virtual field for average rating (to be implemented with reviews)
 courseSchema.virtual('averageRating').get(function(){
-if(this.ratings){
+if(this.ratings && this.ratings.length > 0){
     const totalRatings = this.ratings.reduce((acc, curr) => acc + curr.rating, 0);
     return totalRatings / this.ratings.length;
 }
