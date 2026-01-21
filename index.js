@@ -9,6 +9,7 @@ import xss from "xss";
 import hpp from "hpp";
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import healthRoute from './routes/health.route.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -71,7 +72,7 @@ app.use(
 
 
 // API Routes
-
+app.use('/health', healthRoute);
 
 // it should be always at bottom 
 // 404 handler
