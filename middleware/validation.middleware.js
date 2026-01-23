@@ -1,7 +1,7 @@
 import { body, param, query, validationResult } from 'express-validator';
 import { ApiError } from './error.middleware.js';
 
-
+// This is the wrapper function that will execute the validations and handle errors
 export const validate = (validations) => {
 return async (req,res,next) => {
  // Run all validations
@@ -102,6 +102,9 @@ export const validatePasswordChange = validate([
         .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])/)
         .withMessage('Password must contain at least one number, one uppercase letter, one lowercase letter, and one special character')
 ]);
+
+// any new validation chains can be added here following the same pattern
+// For example , the validations for bio etc can be added here
 
 
 

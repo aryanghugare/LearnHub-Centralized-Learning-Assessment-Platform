@@ -8,11 +8,12 @@ updateUserProfile
 
 import { isAuthenticated } from "../middleware/auth.middleware.js";
 import upload from "../utils/multer.js";
+import { validateSignup , validateSignin } from "../middleware/validation.middleware.js";
 
 const router = express.Router();
 // Auth routes
-router.post("/signup", createUserAccount);
-router.post("/signin", authenticateUser);
+router.post("/signup", validateSignup, createUserAccount);
+router.post("/signin", validateSignin, authenticateUser);
 router.post("/signout", signOutUser);
 
 // Profile routes 
