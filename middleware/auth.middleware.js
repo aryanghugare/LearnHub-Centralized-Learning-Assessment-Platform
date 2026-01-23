@@ -17,7 +17,7 @@ req.id = decoded.userId;
  const user = await User.findById(req.id);
 
 if (!user) {
-throw new AppError("User not found", 404);
+throw new ApiError("User not found", 404);
 }
 req.user = user;
 next();
