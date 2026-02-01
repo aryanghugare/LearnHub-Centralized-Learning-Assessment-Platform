@@ -18,7 +18,7 @@ export const createRazorpayOrder = async (req, res) => {
 
 const course = await Course.findById(courseId);
     if (!course) {
-      throw new ApiError('Course not found', 404);
+      return res.status(404).json({message : 'Course not found'});
     }
 
 const newPurchase = new CoursePurchase({
@@ -62,7 +62,42 @@ await newPurchase.save();
 
 
 export const verifyPayment = async (req, res) => {
-  
+  try {
+const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+const body = razorpay_order_id + "|" + razorpay_payment_id;
+
+// This expectedSignature calculation is from the Razorpay docs
+const expectedSignature = crypto.createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+                                 .update(body.toString())
+                                 .digest('hex');
+
+const isAuthentic = expectedSignature === razorpay_signature;
+
+if(!isAuthentic){
+  return res.status(400).json({message : 'Payment verification failed'});
+
+}
+const purchase = await CoursePurchase.findOne({ paymentId: razorpay_order_id });
+
+if(!purchase){
+  return res.status(404).json({message : 'Purchase record not found'});
+}
+
+purchase.status = 'completed';
+
+await purchase.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Payment verified successfully',
+      purchaseId : purchase.course 
+    });
+
+
+    
+  } catch (error) {
+    throw new ApiError('Payment verification failed', 500);
+  }
 };
 
 
